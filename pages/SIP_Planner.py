@@ -2,11 +2,21 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from datetime import datetime
+import sys
+import os
+from pathlib import Path
+
+# --- DIRECTORY FIX FOR MULTIPAGE STRUCTURE ---
+# This allows the script to find the 'SIP' folder from within the 'pages' folder
+root_path = Path(__file__).parent.parent
+sys.path.append(str(root_path))
+
 # Note: Ensure your local finance module is in the same directory or PYTHONPATH
 try:
-    from finance.portfolio import simulate_portfolio
-    from finance.utils import format_currency
-    from finance.data_fetcher import fetch_real_return
+    # Updated imports to reference the SIP folder package
+    from SIP.finance.portfolio import simulate_portfolio
+    from SIP.finance.utils import format_currency
+    from SIP.finance.data_fetcher import fetch_real_return
 except ImportError:
     # Fallback functions for demonstration if local modules aren't found
     def format_currency(val): return f"₹{val:,.0f}"
